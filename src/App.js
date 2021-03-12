@@ -13,6 +13,7 @@ function App() {
   useEffect(() => {
     getLaunches().then( res => {
       setData(res.data);
+      console.log('ccc', res.data)
       setIsLoading(false);
     }).catch( err => console.log(err));
 
@@ -38,8 +39,7 @@ function App() {
               }
               <tbody>
               {!isLoading && launchData.map(launch => {
-                console.log('here', launch);
-                <Row data={ launch } />
+                return <Row data={ launch } />
               })}
               </tbody>
             </table>

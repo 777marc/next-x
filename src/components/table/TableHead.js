@@ -5,8 +5,10 @@ export default function TableHead() {
         <thead>
             <tr>
                 <th>Launch Id</th>
+                <th>Mission Name</th>
                 <th>Rocket</th>
                 <th>Launch Date</th>
+                <th>Site</th>
                 <th></th>
             </tr>
         </thead>
