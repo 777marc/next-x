@@ -1,22 +1,51 @@
-import logo from './logo.svg';
+import logo from './rocket.png';
 import './App.css';
+import TableHead from './components/table/TableHead';
+import Row from './components/table/Row';
+import React, { useState, useEffect, lazy } from "react";
+import { getLaunches } from './api/spacexAPI';
 
 function App() {
+
+  const [launchData, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    getLaunches().then( res => {
+      setData(res.data);
+      setIsLoading(false);
+    }).catch( err => console.log(err));
+
+  }, []);
+
   return (
     <div className="App">
+      
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        
+        <div className="container">
+          <div>
+
+            <div className="header-title">
+              <img src={logo} className="App-logo" alt="logo" />
+              <p>Upcoming Space X Launches</p>
+              {isLoading && <p>Wait I'm Loading launches for you</p>}
+            </div>
+            
+            <table>
+              {!isLoading &&
+                <TableHead />
+              }
+              <tbody>
+              {!isLoading && launchData.map(launch => {
+                console.log('here', launch);
+                <Row data={ launch } />
+              })}
+              </tbody>
+            </table>
+
+          </div>
+        </div>
       </header>
     </div>
   );
