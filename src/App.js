@@ -1,8 +1,6 @@
 import logo from './rocket.png';
 import './App.css';
-import TableHead from './components/table/TableHead';
-import Row from './components/table/Row';
-import React, { useState, useEffect, lazy } from "react";
+import React, { useState, useEffect } from "react";
 import { getLaunches } from './api/spacexAPI';
 
 function App() {
@@ -13,7 +11,6 @@ function App() {
   useEffect(() => {
     getLaunches().then( res => {
       setData(res.data);
-      console.log('ccc', res.data)
       setIsLoading(false);
     }).catch( err => console.log(err));
 
@@ -24,25 +21,43 @@ function App() {
       
       <header className="App-header">
         
-        <div className="container">
+        <div>
           <div>
 
             <div className="header-title">
               <img src={logo} className="App-logo" alt="logo" />
-              <p>Upcoming Space X Launches</p>
+              <p>Space X Launches</p>
               {isLoading && <p>Wait I'm Loading launches for you</p>}
             </div>
-            
-            <table>
-              {!isLoading &&
-                <TableHead />
-              }
-              <tbody>
-              {!isLoading && launchData.map(launch => {
-                return <Row data={ launch } />
+
+            <div className="cards-container">
+
+            {!isLoading && launchData.map(launch => {
+
+              let formatedDate = Date(launch.launch_date_local);
+
+              return  <div class="card">
+                <div class="card-header">
+                    <img src={launch.links.mission_patch} className alt="" />
+                </div>
+                <div class="card-body">
+                    <span class="tag tag-purple">{launch.rocket.rocket_name}</span>
+                    <h4>{ launch.mission_name }</h4>
+                    <p>
+                        {launch.details}
+                    </p>
+                    <div class="user">
+                        <div class="user-info">
+                            <h5>{launch.launch_site.site_name_long}</h5>
+                            <small>{formatedDate}</small>
+                        </div>
+                    </div>
+                  </div>
+                </div>
               })}
-              </tbody>
-            </table>
+
+              
+            </div>
 
           </div>
         </div>
