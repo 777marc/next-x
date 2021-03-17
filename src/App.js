@@ -44,9 +44,9 @@ function App() {
                 <div class="card-body">
                     <span class="tag tag-red">{launch.rocket.rocket_name}</span>
                     <h4>{ launch.mission_name }</h4>
-                    <p>
+                    <div className="desc">
                         {launch.details}
-                    </p>
+                    </div>
                     <div class="user">
                         <div class="user-info">
                             <h5>{launch.launch_site.site_name_long}</h5>
