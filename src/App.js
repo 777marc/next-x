@@ -1,4 +1,5 @@
 import logo from './rocket.png';
+import xlogo from './xlogo.png';
 import './App.css';
 import React, { useState, useEffect } from "react";
 import { getLaunches } from './api/spacexAPI';
@@ -26,7 +27,7 @@ function App() {
 
             <div className="header-title">
               <img src={logo} className="App-logo" alt="logo" />
-              <p>Space X Launches</p>
+              <p>Space <img src={xlogo} alt="" />  Launches</p>
               {isLoading && <p>Wait I'm Loading launches for you</p>}
             </div>
 
@@ -38,10 +39,10 @@ function App() {
 
               return  <div class="card">
                 <div class="card-header">
-                    <img src={launch.links.mission_patch} className alt="" />
+                    <img src={launch.links.mission_patch} alt="" />
                 </div>
                 <div class="card-body">
-                    <span class="tag tag-purple">{launch.rocket.rocket_name}</span>
+                    <span class="tag tag-red">{launch.rocket.rocket_name}</span>
                     <h4>{ launch.mission_name }</h4>
                     <p>
                         {launch.details}

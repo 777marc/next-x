@@ -13,6 +13,11 @@
   pointer-events: none;
 }
 
+p {
+  font-size: 3em;
+  color: lightgray;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
@@ -191,6 +196,10 @@ table tbody tr:hover .delete {
 
 .tag-pink {
   background-color: pink;
+}
+
+.tag-red {
+  background-color: #b30000;
 }
 
 .user {
