@@ -27,7 +27,7 @@ p {
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
-    height: 3em;
+    height: 8em;
   }
 }
 
@@ -39,6 +39,7 @@ p {
   align-items: center;
   justify-content: center;
   color: white;
+  width: 100%;
 }
 
 .App-link {
@@ -54,92 +55,8 @@ p {
   }
 }
 
-.container {
-  background-color: #273349;
-  border-radius: 10px;
-  box-shadow: 0 5px 10px rgba(12, 16, 31, 0.4);
-  padding: 100px;
-  margin: auto;
-  width: 1000px;
-}
-
 .header-title {
   margin: auto;
-}
-
-table {
-  color: #e2e2e2;
-  padding: 10px;
-  width: 100%;
-}
-
-table th,
-table td {
-  padding: 15px;
-  text-align: left;
-}
-
-table tbody tr {
-  background-color: #1c223b;
-}
-
-table tbody tr:hover {
-  background-color: #151b31;
-  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
-}
-
-table tbody tr td:first-of-type {
-  border-top-left-radius: 5px;
-  border-bottom-left-radius: 5px;
-}
-
-table tbody tr td:last-of-type {
-  border-top-right-radius: 5px;
-  border-bottom-right-radius: 5px;
-  text-align: center;
-}
-
-table tbody tr.priority-200 td:first-of-type {
-  border-left: 5px solid #9c7c64;
-}
-
-table tbody tr.priority-600 td:first-of-type {
-  border-left: 5px solid #fc8cdc;
-}
-
-table tbody tr.priority-300 td:first-of-type {
-  border-left: 5px solid #40c587;
-}
-
-table tbody tr td .fa-circle {
-  transform: scale(0.5);
-}
-
-table tbody tr.priority-200 td .fa-circle {
-  color: #9c7c64;
-}
-
-table tbody tr.priority-600 td .fa-circle {
-  color: #fc8cdc;
-}
-
-table tbody tr.priority-300 td .fa-circle {
-  color: #40c587;
-}
-
-.delete {
-  cursor: pointer;
-  background-color: #242c4c;
-  border: 0;
-  border-radius: 2px;
-  color: #909090;
-  font-size: 16px;
-  padding: 5px 10px;
-  opacity: 0;
-}
-
-table tbody tr:hover .delete {
-  opacity: 1;
 }
 
 .cards-container {
@@ -229,8 +146,16 @@ table tbody tr:hover .delete {
 }
 
 @media (max-width: 940px) {
-  .container {
+  .cards-container {
       grid-template-columns: 1fr;
       justify-items: center;
+  }
+
+  .header-title {
+    margin: auto;
+  }
+
+  p {
+    font-size: 16px;
   }
 }
