@@ -11,6 +11,11 @@ function App() {
 
   useEffect(() => {
     getLaunches().then( res => {
+
+      res.data.sort((a, b) => {
+        return b.flight_number - a.flight_number;
+      });
+
       setData(res.data);
       setIsLoading(false);
     }).catch( err => console.log(err));
@@ -33,11 +38,12 @@ function App() {
 
             <div className="cards-container">
 
-            {!isLoading && launchData.map(launch => {
+            {!isLoading && launchData.map((launch, index) => {
 
-              let formatedDate = Date(launch.launch_date_local);
-
-              return  <div className="card">
+              let mills = Date.parse(launch.launch_date_local);
+              let dt = new Date(mills);
+              
+              return  <div className="card" key={index}>
                 <div className="card-header">
                     <img src={launch.links.mission_patch} alt="" />
                 </div>
@@ -50,7 +56,7 @@ function App() {
                     <div className="user">
                         <div className="user-info">
                             <h5>{launch.launch_site.site_name_long}</h5>
-                            <small>{formatedDate}</small>
+                            <small>{dt.toString()}</small>
                         </div>
                     </div>
                   </div>
