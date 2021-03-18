@@ -39,7 +39,7 @@ p {
   align-items: center;
   justify-content: center;
   color: white;
-  width: 100%;
+
 }
 
 .App-link {
@@ -74,6 +74,7 @@ p {
   overflow: hidden;
   width: 300px;
   color: #444;
+  border: 3px solid lightgray;
 }
 
 .card-header img {

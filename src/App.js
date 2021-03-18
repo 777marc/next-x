@@ -37,18 +37,18 @@ function App() {
 
               let formatedDate = Date(launch.launch_date_local);
 
-              return  <div class="card">
-                <div class="card-header">
+              return  <div className="card">
+                <div className="card-header">
                     <img src={launch.links.mission_patch} alt="" />
                 </div>
-                <div class="card-body">
-                    <span class="tag tag-red">{launch.rocket.rocket_name}</span>
+                <div className="card-body">
+                    <span className="tag tag-red">{launch.rocket.rocket_name}</span>
                     <h4>{ launch.mission_name }</h4>
                     <div className="desc">
                         {launch.details}
                     </div>
-                    <div class="user">
-                        <div class="user-info">
+                    <div className="user">
+                        <div className="user-info">
                             <h5>{launch.launch_site.site_name_long}</h5>
                             <small>{formatedDate}</small>
                         </div>
