@@ -8,19 +8,33 @@ function App() {
 
   const [launchData, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-
+  
   useEffect(() => {
-    getLaunches().then( res => {
+    getLaunchData();
+  }, []);
 
+  function applyFilter(e) {
+
+    if(e.target.value === "") {
+      getLaunchData();
+      return;
+    }
+
+    let filteredResults = launchData.filter(launch => {
+      return launch.mission_name.includes(e.target.value);
+    });
+    setData(filteredResults);
+  }
+
+  function getLaunchData(filter = null) {
+    getLaunches().then( res => {
       res.data.sort((a, b) => {
         return b.flight_number - a.flight_number;
       });
-
       setData(res.data);
       setIsLoading(false);
     }).catch( err => console.log(err));
-
-  }, []);
+  }
 
   return (
     <div className="App">
@@ -34,8 +48,9 @@ function App() {
               <img src={logo} className="App-logo" alt="logo" />
               <p>Space <img src={xlogo} alt="" />  Launches</p>
               {isLoading && <p>Wait I'm Loading launches for you</p>}
+              <input id="search-input" onChange={applyFilter} placeholder="filter results" type="text" className="search" />
             </div>
-
+            
             <div className="cards-container">
 
             {!isLoading && launchData.map((launch, index) => {
