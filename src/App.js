@@ -7,30 +7,52 @@ import { getLaunches } from './api/spacexAPI';
 function App() {
 
   const [launchData, setData] = useState([]);
+  const [filteresLaunchData, setFilteredData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   
   useEffect(() => {
     getLaunchData();
   }, []);
-
-  function applyFilter(e) {
+  
+  let applyFilter = debounce(function(e) {
 
     if(e.target.value === "") {
-      getLaunchData();
+      setFilteredData(launchData);
       return;
     }
 
     let filteredResults = launchData.filter(launch => {
-      return launch.mission_name.includes(e.target.value);
+      let missionName = launch.mission_name.toLowerCase();
+   
+      return missionName.includes(e.target.value.toLowerCase());
     });
-    setData(filteredResults);
-  }
+
+    setFilteredData(filteredResults);
+
+  });
+
+  function debounce(func, wait, immediate) {
+    var timeout;
+    return function() {
+      var context = this, args = arguments;
+      var later = function() {
+        timeout = null;
+        if (!immediate) func.apply(context, args);
+      };
+      var callNow = immediate && !timeout;
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+      if (callNow) func.apply(context, args);
+    };
+  };
+
 
   function getLaunchData(filter = null) {
     getLaunches().then( res => {
       res.data.sort((a, b) => {
         return b.flight_number - a.flight_number;
       });
+      setFilteredData(res.data)
       setData(res.data);
       setIsLoading(false);
     }).catch( err => console.log(err));
@@ -53,7 +75,7 @@ function App() {
             
             <div className="cards-container">
 
-            {!isLoading && launchData.map((launch, index) => {
+            {!isLoading && filteresLaunchData.map((launch, index) => {
 
               let mills = Date.parse(launch.launch_date_local);
               let dt = new Date(mills);
